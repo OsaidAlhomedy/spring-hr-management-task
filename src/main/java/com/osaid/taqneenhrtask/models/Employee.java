@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,4 +31,8 @@ public class Employee {
 
     @CreatedDate
     private Date date = new Date();
+
+    @OneToMany(mappedBy = "employee")
+    @ToString.Exclude
+    private List<Leave> leavesList;
 }

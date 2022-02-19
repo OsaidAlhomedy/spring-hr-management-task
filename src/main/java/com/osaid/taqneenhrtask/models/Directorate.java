@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,11 +17,9 @@ public class Directorate {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(nullable = false,unique = true)
+    private String name;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "directorate")
+    private List<Department> departmentList;
 }

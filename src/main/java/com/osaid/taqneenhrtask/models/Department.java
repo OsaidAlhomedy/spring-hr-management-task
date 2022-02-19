@@ -17,18 +17,16 @@ public class Department {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String departmentName;
+    @OneToOne
+    private Manager manager;
 
+    @Column(unique = true,nullable = false)
+    private String departmentName;
 
     @OneToMany(mappedBy = "department")
     private List<Employee> employeeList;
 
+    @ManyToOne
+    private Directorate directorate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
