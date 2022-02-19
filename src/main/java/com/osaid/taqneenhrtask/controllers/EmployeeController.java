@@ -4,6 +4,7 @@ import com.osaid.taqneenhrtask.models.Employee;
 import com.osaid.taqneenhrtask.models.Leave;
 import com.osaid.taqneenhrtask.repositries.EmployeeRepo;
 import com.osaid.taqneenhrtask.repositries.LeavesRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@Slf4j
 @RequestMapping("/employee")
 public class EmployeeController {
 
@@ -69,11 +71,11 @@ public class EmployeeController {
     @PostMapping("/requestLeave/{employeeName}")
     public ResponseEntity<String> requestLeave(@PathVariable String employeeName, @RequestBody Leave leave) {
         Employee employee1 = employeeRepo.findEmployeeByName(employeeName);
-        var res = leavesRepo.save(leave);
-        employee1.getLeavesList().add(res);
-        System.out.println(res);
+        var savedLeave = leavesRepo.save(leave);
+        employee1.getLeavesList().add(savedLeave);
+        System.out.println(savedLeave);
         employeeRepo.save(employee1);
-        return new ResponseEntity<>("Wait for manager approval", HttpStatus.valueOf(204));
+        return new ResponseEntity<>("{\"nice\":\"Wait for manager \"}", HttpStatus.valueOf(204));
     }
 
     @GetMapping("/getLeavesByDate/{employeeName}")

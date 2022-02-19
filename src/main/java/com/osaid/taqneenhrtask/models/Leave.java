@@ -21,7 +21,8 @@ public class Leave {
     private Date date;
     private Boolean approved = false;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     public Leave(String reason,Date date){
