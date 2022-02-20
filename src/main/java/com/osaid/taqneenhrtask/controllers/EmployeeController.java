@@ -71,8 +71,8 @@ public class EmployeeController {
     @PostMapping("/requestLeave/{employeeName}")
     public ResponseEntity<String> requestLeave(@PathVariable String employeeName, @RequestBody Leave leave) {
         Employee employee1 = employeeRepo.findEmployeeByName(employeeName);
+        leave.setEmployee(employee1);
         var savedLeave = leavesRepo.save(leave);
-        employee1.getLeavesList().add(savedLeave);
         System.out.println(savedLeave);
         employeeRepo.save(employee1);
         return new ResponseEntity<>("{\"nice\":\"Wait for manager \"}", HttpStatus.valueOf(204));

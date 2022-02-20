@@ -1,5 +1,6 @@
 package com.osaid.taqneenhrtask.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,8 @@ public class Leave {
     private Date date;
     private Boolean approved = false;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 

@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
-@Repository @Transactional
+@Repository
 public interface EmployeeRepo extends JpaRepository<Employee,Long> {
     Employee findEmployeeByName(String name);
     List<Employee> findAllByDateBetween(Date from , Date to);
